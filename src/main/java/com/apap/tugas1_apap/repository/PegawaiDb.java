@@ -18,6 +18,8 @@ public interface PegawaiDb extends JpaRepository<PegawaiModel, Long>{
 	
 	boolean existsByNip(String nip);
 	
-	List<PegawaiModel> findByInstansiAndJabatan(InstansiModel instansi, JabatanModel jabatan);
+	List<PegawaiModel> findByInstansi(InstansiModel instansi);
+	
+	List<PegawaiModel> findByJabatan(JabatanModel jabatan);
 }
 

@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.apap.tugas1_apap.model.JabatanModel;
+import com.apap.tugas1_apap.model.PegawaiModel;
 import com.apap.tugas1_apap.service.JabatanService;
+import com.apap.tugas1_apap.service.PegawaiService;
 
 @Controller
 public class JabatanController {
 	@Autowired
 	private JabatanService jabatanService;
+	
+	@Autowired
+	private PegawaiService pegawaiService;
 	
 	@RequestMapping(value="/jabatan/tambah", method = RequestMethod.GET)
 	private String tambah(Model model) {
@@ -68,6 +73,14 @@ public class JabatanController {
 	
 	@RequestMapping(value="/jabatan/hapus", method = RequestMethod.POST)
 	private String hapus(@ModelAttribute JabatanModel jabatan, RedirectAttributes ra) {
+		List<PegawaiModel> allPegawai = pegawaiService.findByJabatan(jabatan);
+		
+		if (allPegawai.size() > 0) {
+			ra.addFlashAttribute("alert", "alert-red");
+			ra.addFlashAttribute("alertText", "Data Tidak Berhasil Dihapus, masih ada pegawainya");
+			String link = "redirect:/jabatan/view?idJabatan="+String.valueOf(jabatan.getId());
+			return link;
+		}
 		System.out.println(jabatan.getDeskripsi());
 		jabatanService.deleteJabatan(jabatan.getId());
 		ra.addFlashAttribute("alert", "alert-green");

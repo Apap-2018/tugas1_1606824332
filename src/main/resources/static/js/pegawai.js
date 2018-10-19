@@ -50,6 +50,7 @@ var cariPegawai = function() {
 			'idJabatan' : idJabatan
 		// perlu oper model juga ga ya?
 		},
+		dataType: 'json',
 		success : function(output) {
 			console.log(output.selectedPegawai)
 			selectedPegawai = output.selectedPegawai
@@ -64,11 +65,14 @@ var cariPegawai = function() {
 						'<td>'+pegawai.tanggalLahir+'</td>'+
 						'<td>'+pegawai.tahunMasuk+'</td>'+
 						'<td>'+pegawai.namaInstansi+'</td>'+
-						'<td>'+pegawai.jabatan+'</td>'+
+						'<td>'+pegawai.jabatan[0].nama+'</td>'+
 					'</tr>'
 				console.log("idInstansi: "+instansi.id)
 			})
 			$("#body-table").append(html)
+		},
+		error: function(error){
+			console.log(error)
 		}
 	});
 }

@@ -12,5 +12,4 @@ import com.apap.tugas1_apap.model.PegawaiModel;
 public interface JabatanDb extends JpaRepository<JabatanModel, Long>{
 
 	List<JabatanModel> findByPegawaiOrderByGajiPokokDesc(PegawaiModel pegawai);
-	
 }

@@ -19,5 +19,7 @@ public interface PegawaiService {
 
 	String generateNip(PegawaiModel pegawai);
 
-	List<PegawaiModel> findByInstansiAndJabatan(InstansiModel instansi, JabatanModel jabatan);
+	List<PegawaiModel> findByInstansi(InstansiModel instansi);
+
+	List<PegawaiModel> findByJabatan(JabatanModel jabatan);
 }

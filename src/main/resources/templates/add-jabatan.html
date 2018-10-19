@@ -9,7 +9,7 @@
 </head>
 <body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
-	<div th:replace="${alert} ? ~{fragments/fragment :: ${alert}($alertText)} : ~{}"></div>
+	<div th:replace="${alert} ? ~{fragments/fragment :: ${alert}} : ~{}"></div>
 	<div class="container-fluid">
 		<div class="row">
 			<span class="col-md-3"></span>

@@ -171,9 +171,9 @@ public class PegawaiController {
 	private @ResponseBody Map<String, Object> cari(@RequestParam(value="idInstansi") long idInstansi, @RequestParam(value="idJabatan") int idJabatan, Model model) {
 		InstansiModel instansi = instansiService.getInstansiById(idInstansi).get();
 		JabatanModel jabatan = jabatanService.findJabatanByIdJabatan(idJabatan);
-		List<PegawaiModel> selectedPegawai = pegawaiService.findByInstansiAndJabatan(instansi, jabatan);
+		List<PegawaiModel> selectedPegawai = pegawaiService.findByInstansi(instansi);
 		
-		System.out.println(selectedPegawai.get(0).getNama());
+		System.out.println("coba");
 		
 		Map<String, Object> output = new HashMap<String, Object>();
 		output.put("selectedPegawai", selectedPegawai);
