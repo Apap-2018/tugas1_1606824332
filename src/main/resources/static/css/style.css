@@ -1,0 +1,15 @@
+.container-fluid{
+	margin-top: 1rem;
+}
+
+.jumbotron{
+	margin-bottom: 1rem;
+}
+
+.card{
+	margin-bottom: 1rem;
+}
+
+#input-nip{
+	max-width:25rem;
+}

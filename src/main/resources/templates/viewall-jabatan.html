@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+		<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+	</head>
+	<body>
+		<nav th:replace="fragments/fragment :: navbar"></nav>
+		
+		<div class="container-fluid">
+			<h3>Daftar Jabatan</h3>
+			<table id="table_id" class="display" style="width:100%">
+	        <thead>
+	            <tr>
+	                <th>Nama</th>
+	                <th>Deskripsi</th>
+	                <th>Gaji Pokok</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        	<tr th:each="jabatan : ${allJabatan}">
+	        		<td th:text="${jabatan.nama}"></td>
+	        		<td th:text="${jabatan.deskripsi}"></td>
+	        		<td th:text="${jabatan.gajiPokok}"></td>
+	        	</tr>
+	        </tbody>
+	        <tfoot>
+	            <tr>
+	                <th>Nama</th>
+	                <th>Deskripsi</th>
+	                <th>Gaji Pokok</th>
+	            </tr>
+	        </tfoot>
+	    </table>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	
+	<script>
+	$(document).ready( function () {
+	    $('#table_id').DataTable();
+	} );
+	</script>
+	</body>
+</html>

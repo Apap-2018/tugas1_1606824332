@@ -1,0 +1,56 @@
+
+<div th:fragment="detail" class="col-md-6">
+	<div class="card">
+		<div class="card-header"
+			th:text="${card-title}">
+			Lihat Data Pegawai</div>
+		<div class="card-body">
+			<div class="row">
+				<p class="col-md-6 col-xs-6">NIP</p>
+				<p class="col-md-6 col-xs-6" th:text="${pegawai.nip}"></p>
+			</div>
+			<div class="row">
+				<p class="col-md-6 col-xs-6">Nama</p>
+				<p class="col-md-6 col-xs-6" th:text="${pegawai.nama}"></p>
+			</div>
+			<div class="row">
+				<p class="col-md-6 col-xs-6">Tempat Lahir</p>
+				<p class="col-md-6 col-xs-6" th:text="${pegawai.tempat_lahir}"></p>
+			</div>
+			<div class="row">
+				<p class="col-md-6 col-xs-6">Tanggal Lahir</p>
+				<p class="col-md-6 col-xs-6" th:text="${pegawai.tanggal_lahir}"></p>
+			</div>
+			<div class="row">
+				<p class="col-md-6 col-xs-6">Tahun Masuk</p>
+				<p class="col-md-6 col-xs-6" th:text="${pegawai.tahun_masuk}"></p>
+			</div>
+			<div class="row">
+				<p class="col-md-6 col-xs-6">Nama Instansi</p>
+				<p class="col-md-6 col-xs-6"
+					th:text="${pegawai.instansi.nama} + ' - ' +${pegawai.instansi.provinsi.nama}"></p>
+			</div>
+			<div class="row">
+				<p class="col-md-6 col-xs-6">Jabatan</p>
+				<div class="col-md-6 col-xs-6">
+					<ul>
+						<span th:each="jabatan : ${pegawai.jabatan}">
+							<li th:text="${jabatan.nama}"></li>
+						</span>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<p class="col-md-6 col-xs-6">Gaji</p>
+				<p class="col-md-6 col-xs-6" th:text="'Rp'+${gaji}"></p>
+			</div>
+
+			<!--
+					    <form th:action="@{/dealer/delete}">
+					        <input type="hidden" name="dealerId" th:value="${dealer.id}">
+					        <button type="submit" class="btn btn-danger">Hapus Dealer</button>
+					    </form>
+					 -->
+		</div>
+	</div>
+</div>

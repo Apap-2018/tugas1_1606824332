@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Lihat Pegawai Tertua dan Termuda</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+	<div class="container-fluid">
+		<div class="row">
+	        <div class="col-md-6">
+	            <div class="card">
+	                <div class="card-header">
+	                    Pegawai Termuda
+	                </div>
+					<div class="card-body">
+						<div class="row">
+							<p class="col-md-6 col-xs-6">NIP</p>
+							<p class="col-md-6 col-xs-6" th:text="${pegTermuda.nip}"></p>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Nama</p>
+							<p class="col-md-6 col-xs-6" th:text="${pegTermuda.nama}"></p>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Tempat Lahir</p>
+							<p class="col-md-6 col-xs-6" th:text="${pegTermuda.tempatLahir}"></p>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Tanggal Lahir</p>
+							<p class="col-md-6 col-xs-6" th:text="${pegTermuda.tanggalLahir}"></p>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Tahun Masuk</p>
+							<p class="col-md-6 col-xs-6" th:text="${pegTermuda.tahunMasuk}"></p>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Nama Instansi</p>
+							<p class="col-md-6 col-xs-6"
+								th:text="${pegTermuda.instansi.nama} + ' - ' +${pegTermuda.instansi.provinsi.nama}"></p>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Jabatan</p>
+							<div class="col-md-6 col-xs-6">
+								<ul>
+									<span th:each="jabatan : ${pegTermuda.jabatan}">
+										<li th:text="${jabatan.nama}"></li>
+									</span>
+								</ul>
+							</div>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Gaji</p>
+							<p class="col-md-6 col-xs-6" th:text="'Rp'+${gajiTermuda}"></p>
+						</div>
+
+						<!--
+					    <form th:action="@{/dealer/delete}">
+					        <input type="hidden" name="dealerId" th:value="${dealer.id}">
+					        <button type="submit" class="btn btn-danger">Hapus Dealer</button>
+					    </form>
+					 -->
+					</div>
+				</div>
+	        </div>
+	        <div class="col-md-6">
+	            <div class="card">
+	                <div class="card-header">
+	                    Pegawai Tertua
+	                </div>
+					<div class="card-body">
+						<div class="row">
+							<p class="col-md-6 col-xs-6">NIP</p>
+							<p class="col-md-6 col-xs-6" th:text="${pegTertua.nip}"></p>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Nama</p>
+							<p class="col-md-6 col-xs-6" th:text="${pegTertua.nama}"></p>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Tempat Lahir</p>
+							<p class="col-md-6 col-xs-6" th:text="${pegTertua.tempatLahir}"></p>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Tanggal Lahir</p>
+							<p class="col-md-6 col-xs-6" th:text="${pegTertua.tanggalLahir}"></p>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Tahun Masuk</p>
+							<p class="col-md-6 col-xs-6" th:text="${pegTertua.tahunMasuk}"></p>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Nama Instansi</p>
+							<p class="col-md-6 col-xs-6"
+								th:text="${pegTertua.instansi.nama} + ' - ' +${pegTertua.instansi.provinsi.nama}"></p>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Jabatan</p>
+							<div class="col-md-6 col-xs-6">
+								<ul>
+									<span th:each="jabatan : ${pegTertua.jabatan}">
+										<li th:text="${jabatan.nama}"></li>
+									</span>
+								</ul>
+							</div>
+						</div>
+						<div class="row">
+							<p class="col-md-6 col-xs-6">Gaji</p>
+							<p class="col-md-6 col-xs-6" th:text="'Rp'+${gajiTertua}"></p>
+						</div>
+
+						<!--
+					    <form th:action="@{/dealer/delete}">
+					        <input type="hidden" name="dealerId" th:value="${dealer.id}">
+					        <button type="submit" class="btn btn-danger">Hapus Dealer</button>
+					    </form>
+					 -->
+					</div>
+				</div>
+	        </div>
+	    </div>
+	 </div>
+</body>
+
+</html>
