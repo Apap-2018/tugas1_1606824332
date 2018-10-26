@@ -1,6 +1,7 @@
 package com.apap.tugas1_apap.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.apap.tugas1_apap.model.JabatanModel;
 import com.apap.tugas1_apap.model.PegawaiModel;
@@ -11,7 +12,7 @@ public interface JabatanService {
 	
 	void addJabatan(JabatanModel jabatan);
 	
-	JabatanModel findJabatanByIdJabatan(long idJabatan);
+	Optional<JabatanModel> findJabatanByIdJabatan(long idJabatan);
 	
 	List<JabatanModel> getListJabatan();
 

@@ -9,6 +9,7 @@
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" th:href="@{/css/style.css}">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 </head>
 
 <head th:fragment="js">
@@ -20,25 +21,25 @@
 <body>
 	<div th:fragment="navbar">
 		<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-		  <a class="navbar-brand" th:href="@{/}">Navbar</a>
+		  <a class="navbar-brand" th:href="@{/}">SIPEG</a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
 		  <div class="collapse navbar-collapse" id="navbarNavDropdown">
 		    <ul class="navbar-nav">
-		      <li class="nav-item active">
+		      <li th:attrappend="class = ${active=='home'} ? 'nav-item active':'nav-item'">
 		        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
 		      </li>
-		      <li class="nav-item">
+		      <li th:attrappend="class = ${active=='tambah-pegawai'} ? 'nav-item active':'nav-item'">
 		        <a class="nav-link" th:href="@{/pegawai/tambah}">Tambah Pegawai</a>
 		      </li>
-		      <li class="nav-item">
+		      <li th:attrappend="class = ${active=='tambah-jabatan'} ? 'nav-item active':'nav-item'">
 		        <a class="nav-link" th:href="@{/jabatan/tambah}">Tambah Jabatan</a>
 		      </li>
-		      <li class="nav-item">
+		      <li th:attrappend="class = ${active=='cari-pegawai'} ? 'nav-item active':'nav-item'">
 		        <a class="nav-link" th:href="@{/pegawai/cari}">Cari Pegawai</a>
 		      </li>
-		      <li class="nav-item">
+		      <li th:attrappend="class = ${active=='lihat-jabatan'} ? 'nav-item active':'nav-item'">
 		        <a class="nav-link" th:href="@{/jabatan/viewall}">Lihat Semua Jabatan</a>
 		      </li>
 		    </ul>

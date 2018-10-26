@@ -2,64 +2,71 @@
 	<div class="form-group row">
 		<label for="nama" class="col-sm-4 col-form-label">Nama</label>
 		<div class="col-sm-8">
-			<input type="text" name="nama" class="form-control" id="nama"
-				placeholder="Nama Pegawai">
+			<input type="text" name="nama" class="form-control" id="nama" th:value="*{nama}" placeholder="Nama Pegawai" required>
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="deskripsi" class="col-sm-4 col-form-label">Tempat
-			Lahir</label>
+		<label for="deskripsi" class="col-sm-4 col-form-label">Tempat Lahir</label>
 		<div class="col-sm-8">
-			<input type="text" name="tempatLahir" class="form-control"
-				id="tempatLahir" placeholder="Tempat Lahir">
+			<input type="text" name="tempatLahir" class="form-control" th:value="*{tempatLahir}" id="tempatLahir" placeholder="Tempat Lahir" required>
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="tanggalLahir" class="col-sm-4 col-form-label">Tanggal
-			Lahir Pokok</label>
+		<label for="tanggalLahir" class="col-sm-4 col-form-label">Tanggal Lahir</label>
 		<div class="col-sm-8">
-			<input type="date" name="tanggalLahir" class="form-control"
-				id="tanggalLahir" placeholder="Tanggal Lahir">
+			<input type="date" name="tanggalLahir" class="form-control" id="tanggalLahir" th:value="*{tanggalLahir}" placeholder="Tanggal Lahir" required>
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="tahunMasuk" class="col-sm-4 col-form-label">Tahun
-			Masuk</label>
+		<label for="tahunMasuk" class="col-sm-4 col-form-label">Tahun Masuk</label>
 		<div class="col-sm-8">
-			<input type="number" name="tahunMasuk" class="form-control"
-				id="tahunMasuk" placeholder="Tahun Masuk">
+			<input type="number" name="tahunMasuk" th:value="*{tahunMasuk}" class="form-control" id="tahunMasuk" placeholder="Tahun Masuk" required>
 		</div>
 	</div>
 	<div class="form-group row">
 		<label for="provinsi" class="col-sm-4 col-form-label">Provinsi</label>
-		<select id="provinsi" name="idProvinsi" onchange="showInstansi()">
-			<option value="" disabled selected>Pilih Provinsi</option>
-			<option th:each="provinsi : ${allProvinsi}" th:value="${provinsi.id}"
-				th:text="${provinsi.nama}">Provinsi</option>
-		</select>
+		<span th:if="*{instansi} == null">
+			<select id="provinsi" name="idProvinsi" onchange="showInstansi()" class="col-sm-8" required>
+				<option disabled selected>Pilih Provinsi</option>
+				<option th:each="provinsi : ${allProvinsi}" th:value="${provinsi.id}" th:text="${provinsi.nama}">Provinsi</option>
+			</select>
+		</span>
+		<span th:unless="*{instansi} == null">
+			<select id="provinsi" name="idProvinsi" onchange="showInstansi()" class="col-sm-8" required>
+				<option  th:value="*{instansi.provinsi.id}" selected="selected" th:text="*{instansi.provinsi.nama}"></option>
+				<option th:each="provinsi : ${allProvinsi}" th:value="${provinsi.id}" th:text="${provinsi.nama}">Provinsi</option>
+			</select>
+		</span>
 	</div>
 	<div class="form-group row">
-		<label for="instansi" class="col-sm-4 col-form-label">Nama
-			Instansi</label> <select id="instansi" th:field="${pegawai.instansi}"
-			name="idInstansi" onchange="showJabatan()">
-			<option value="" disabled selected>Pilih Instansi</option>
-			<option th:each="instansi : ${allInstansi}" th:value="${instansi.id}"
-				th:text="${instansi.nama}">Instansi</option>
-		</select>
-	</div>
-	<div class="form-group row">
-		<label for="jabatan" class="col-sm-4 col-form-label">Jabatan</label> <select
-			id="jabatan" th:field="${pegawai.jabatan}" name="idJabatan"
-			class="col-sm-8">
-			<option th:each="jabatan : ${allJabatan}" th:value="${jabatan.id}"
-				th:text="${jabatan.nama} + ' - ' + ${jabatan.nama}">Jabatan</option>
-		</select>
+		<label for="instansi" class="col-sm-4 col-form-label">Nama Instansi</label> 
+		<span th:if="*{instansi} == null">
+			<select id="instansi" th:field="*{instansi}" name="idInstansi" required>
+				<option value="Pilih Provinsi Terlebih Dahulu" disabled selected>Pilih Provinsi Terlebih Dahulu</option>
+				<option th:each="instansi : ${allInstansi}" th:value="${instansi.id}" th:text="${instansi.nama}">Instansi</option>
+			</select>
+		</span>
+		<span th:unless="*{instansi} == null">
+			<select id="instansi" th:field="*{instansi}" name="idInstansi" onchange="showJabatan()" required>
+				<option th:value="*{instansi.id}" selected="selected" th:text="*{instansi.nama}" disabled></option>
+				<option th:each="instansi : ${allInstansi}" th:value="${instansi.id}" th:text="${instansi.nama}">Instansi</option>
+			</select>
+		</span>
 	</div>
 	<div class="form-group">
-		<div class="float-right">
-			<button type="submit" class="btn btn-primary">Add</button>
-		</div>
+		<span th:each="jabatan, iterationStat : *{jabatan}" class="row" required>
+			<label for="jabatan" class="col-sm-4 col-form-label" th:style="${iterationStat.count} != 1 ? 'color:white;' : ''">Jabatan</label><br>
+			<select class="select-jabatan col-sm-6" name="jabatan">
+				<option value="Pilih Jabatan" disabled selected>Pilih Jabatan</option>
+				<option th:each="jabatan : ${allJabatan}" th:field="*{jabatan[__${iterationStat.index}__]}" th:value="${jabatan.id}" th:text="${jabatan.nama}"></option>
+			</select>
+			<button type="submit" class="btn btn-danger btn-sm" name="deleteRow" th:value="${iterationStat.index}" th:style="${iterationStat.count} == 1 ? 'display: none;' : ''"><i class="fas fa-minus"></i></button>
+			<button type="submit" class="btn btn-info btn-sm" name="addRow" th:style="${iterationStat.index != (iterationStat.size-1)} ? 'display:none;' : ''"><i class="fas fa-plus"></i></button>
+		</span>
+		
 	</div>
+
+	
 </div>
 
 
@@ -67,28 +74,23 @@
 	<div class="form-group row">
 		<label for="nama" class="col-sm-2 col-form-label">Nama</label>
 		<div class="col-sm-10">
-			<input type="text" name="nama" class="form-control" id="nama"
-				placeholder="Nama Jabatan">
+			<input type="text" th:value="*{nama}" name="nama" class="form-control" id="nama"
+				placeholder="Nama Jabatan" required>
 		</div>
 	</div>
 	<div class="form-group row">
 		<label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
 		<div class="col-sm-10">
-			<input type="text" name="deskripsi" class="form-control"
-				id="deskripsi" placeholder="Deskripsi Jabatan">
+			<input type="text" th:value="*{deskripsi}" name="deskripsi" class="form-control"
+				id="deskripsi" placeholder="Deskripsi Jabatan" required>
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="gajiPokok" class="col-sm-2 col-form-label">Gaji
+		<label for="gajiPokok"class="col-sm-2 col-form-label">Gaji
 			Pokok</label>
 		<div class="col-sm-10">
-			<input type="number" name="gajiPokok" class="form-control"
-				id="gajiPokok" placeholder="Gaji Pokok Jabatan">
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="float-right">
-			<button type="submit" class="btn btn-primary">Add</button>
+			<input type="number" th:value="*{gajiPokok}" name="gajiPokok" class="form-control"
+				id="gajiPokok" placeholder="Gaji Pokok Jabatan" required>
 		</div>
 	</div>
 </div>

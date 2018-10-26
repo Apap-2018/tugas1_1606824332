@@ -77,4 +77,14 @@ public class PegawaiServiceImpl implements PegawaiService{
 	public List<PegawaiModel> findByJabatan(JabatanModel jabatan){
 		return pegawaiDb.findByJabatan(jabatan);
 	}
+	
+	@Override
+	public List<PegawaiModel> findAll(){
+		return pegawaiDb.findAll();
+	}
+	
+	@Override 
+	public List<PegawaiModel> findByInstansiJabatan(InstansiModel instansi, JabatanModel jabatan){
+		return pegawaiDb.findByInstansiAndJabatan(instansi, jabatan);
+	}
 }

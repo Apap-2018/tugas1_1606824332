@@ -22,4 +22,8 @@ public interface PegawaiService {
 	List<PegawaiModel> findByInstansi(InstansiModel instansi);
 
 	List<PegawaiModel> findByJabatan(JabatanModel jabatan);
+
+	List<PegawaiModel> findAll();
+
+	List<PegawaiModel> findByInstansiJabatan(InstansiModel instansi, JabatanModel jabatan);
 }

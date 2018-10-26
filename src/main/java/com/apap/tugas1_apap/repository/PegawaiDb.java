@@ -21,5 +21,7 @@ public interface PegawaiDb extends JpaRepository<PegawaiModel, Long>{
 	List<PegawaiModel> findByInstansi(InstansiModel instansi);
 	
 	List<PegawaiModel> findByJabatan(JabatanModel jabatan);
+	
+	List<PegawaiModel> findByInstansiAndJabatan(InstansiModel instansi, JabatanModel jabatan);
 }
 

@@ -8,7 +8,7 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <nav th:replace="fragments/fragment :: navbar(active='home')"></nav>
 
     <div class="container-fluid">
         <div class="jumbotron jumbotron-fluid">
@@ -50,7 +50,8 @@
                         <form th:action="@{/jabatan/view}" method="GET">
                         	<div class="input-group mb-3">
 							  <select id="jabatan" name="idJabatan" > 
-							  	  <option th:each="jabatan : ${allJabatan}" th:value="${jabatan.id}" th:selected="${jabatan.nama}" th:text="${jabatan.nama}">Jabatan</option>
+							  		<option value="Pilih Jabatan" disabled selected>Pilih Jabatan</option>
+							  	  <option th:each="jabatan : ${allJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}">Jabatan</option>
 							  </select>
 							 <div class="input-group-append">
 							    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Find!</button>
@@ -73,7 +74,8 @@
                         <form th:action="@{/pegawai/termuda-tertua}" method="GET">
                         	<div class="input-group mb-3">
 							  <select id="instansi" name="idInstansi" > 
-							  	  <option th:each="instansi : ${allInstansi}" th:value="${instansi.id}" th:selected="${instansi.nama}" th:text="${instansi.nama} + ' - ' + ${instansi.provinsi.nama}">Instansi</option>
+							  	<option value="Pilih Instance" disabled selected>Pilih Instansi</option>
+							  	  <option th:each="instansi : ${allInstansi}" th:value="${instansi.id}" th:text="${instansi.nama} + ' - ' + ${instansi.provinsi.nama}">Instansi</option>
 							  </select>
 							 <div class="input-group-append">
 							    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Find!</button>

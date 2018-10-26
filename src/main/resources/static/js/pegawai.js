@@ -19,13 +19,13 @@ var showInstansi = function() {
 			console.log(output.allInstansi)
 			allInstansi = output.allInstansi
 
-			html = ''
+			html = '<option value="" disabled selected>Pilih Instansi</option>'
 			allInstansi.forEach(function(instansi) {
 				html += '<option value=' + instansi.id + '>' + instansi.nama
 						+ '</option>'
 				console.log(instansi.id)
 			})
-			$("#instansi").append(html)
+			$("#instansi").html(html)
 
 			// $("#instansi").removeAttribute("disabled")
 			console.log($("#instansi").val())
@@ -50,11 +50,14 @@ var cariPegawai = function() {
 			'idJabatan' : idJabatan
 		// perlu oper model juga ga ya?
 		},
-		dataType: 'json',
+		dataType: 'text',
 		success : function(output) {
-			console.log(output.selectedPegawai)
-			selectedPegawai = output.selectedPegawai
 			
+			console.log(output.selectedPegawai)
+			console.log(output)
+			outputJson = JSON.parse(output)
+			selectedPegawai = outputJson.selectedPegawai
+			console.log(selectedPegawai)
 			html = ''
 			selectedPegawai.forEach(function(pegawai) {
 				html += 

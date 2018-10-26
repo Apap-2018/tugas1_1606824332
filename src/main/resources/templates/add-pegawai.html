@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title th:text="${title}">Tambah Jabatan</title>
+<title>Tambah Pegawai</title>
 
 <object th:include="fragments/fragment :: css" th:remove="tag"></object>
 <object th:include="fragments/fragment :: js" th:remove="tag"></object>
@@ -10,22 +10,26 @@
 <script th:src="@{/js/pegawai.js}"></script>
 </head>
 <body>
-	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<nav th:replace="fragments/fragment :: navbar(active='tambah-pegawai')"></nav>
 	<div class="container-fluid">
 		<div class="row">
-			<span class="col-md-3"></span>
-			<div class="col-md-6">
+			<span class="col-md-2"></span>
+			<div class="col-md-7">
 				<div class="card">
 					<div class="card-header" >Tambah Pegawai</div>
 					<div class="card-body">
 						<form th:fragment="form-pegawai" th:action=@{/pegawai/tambah} method="POST" th:object=${pegawai}>
 							<div th:include="~{fragments/form :: form-pegawai}"></div>
+							<div class="form-group">
+								<div class="float-right">
+									<button type="submit" class="btn btn-primary">Add</button>
+								</div>
+							</div>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

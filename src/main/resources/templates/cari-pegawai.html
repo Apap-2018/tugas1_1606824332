@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<title>Cari Pegawai</title>
 <object th:include="fragments/fragment :: css" th:remove="tag"></object>
 <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 <script th:src="@{/js/pegawai.js}"></script>
 </head>
 <body>
-	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<nav th:replace="fragments/fragment :: navbar(active='cari-pegawai')"></nav>
 	<div class="container-fluid">
 
 		<h3>Pencarian Pegawai</h3>
-		<form>
+		<form th:action=@{/pegawai/cari} th:object="${pegawai}" method ="GET">
 			<div class="form-group row">
 				<label for="provinsi" class="col-sm-4 col-form-label">Provinsi</label>
 				<select id="provinsi" name="idProvinsi" onchange="showInstansi()">
@@ -20,64 +21,62 @@
 				</select>
 			</div>
 			<div class="form-group row">
-				<label for="instansi" class="col-sm-4 col-form-label">Nama
-					Instansi</label> <select id="instansi" th:field="${pegawai.instansi}"
-					name="idInstansi" onchange="showJabatan()">
+				<label for="instansi" class="col-sm-4 col-form-label">Nama Instansi</label> 
+				<select id="instansi" th:field="*{instansi}" name="idInstansi" onchange="showJabatan()">
 					<option value="" disabled selected>Pilih Instansi</option>
-					<option th:each="instansi : ${allInstansi}"
-						th:value="${instansi.id}" th:text="${instansi.nama}">Instansi</option>
+					<option th:each="instansi : ${allInstansi}" th:value="${instansi.id}" th:text="${instansi.nama}">Instansi</option>
 				</select>
 			</div>
 			<div class="form-group row">
 				<label for="jabatan" class="col-sm-4 col-form-label">Jabatan</label>
-				<select id="jabatan" th:field="${pegawai.jabatan}" name="idJabatan"
-					class="col-sm-8">
+				<select id="jabatan" name="idJabatan" class="col-sm-5">
+					<option value="" disabled selected>Pilih Jabatan</option>
 					<option th:each="jabatan : ${allJabatan}" th:value="${jabatan.id}"
-						th:text="${jabatan.nama} + ' - ' + ${jabatan.nama}">Jabatan</option>
+						th:text="${jabatan.nama}">Jabatan</option>
 				</select>
 			</div>
 			<div>
-				<button type="button" onclick="cariPegawai()" class="btn btn-primary">Cari</button>
+				<button type="submit" class="btn btn-primary">Cari</button>
 			</div>
 		</form>
-		<div class="container-fluid">
-			<table id="table_id" class="display" style="width: 100%">
-				<thead>
-					<tr>
-						<th>NIP</th>
-						<th>Nama</th>
-						<th>Tempat Lahir</th>
-						<th>Tanggal Lahir</th>
-						<th>Tahun Masuk</th>
-						<th>Nama Instansi</th>
-						<th>Jabatan</th>
+		<br>
+		<table id="table_id" class="display" style="width: 100%">
+			<thead>
+				<tr>
+					<th>NIP</th>
+					<th>Nama</th>
+					<th>Tempat Lahir</th>
+					<th>Tanggal Lahir</th>
+					<th>Tahun Masuk</th>
+					<th>Nama Instansi</th>
+					<th>Jabatan</th>
+				</tr>
+			</thead>
+			<tbody id="body-table">
+				<span th:each="pegawai : ${selectedPegawai}">
+					<tr th:each="jabatan : ${pegawai.jabatan}">
+							<td th:text="${pegawai.nip}"></td>
+							<td th:text="${pegawai.nama}"></td>
+							<td th:text="${pegawai.tempatLahir}"></td>
+							<td th:text="${pegawai.tanggalLahir}"></td>
+							<td th:text="${pegawai.tahunMasuk}"></td>
+							<td th:text="${pegawai.instansi.nama}"></td>
+							<td th:text="${jabatan.nama}"></td>
 					</tr>
-				</thead>
-				<tbody id="body-table">
-					<tr th:each="pegawai : ${selectedPegawai}">
-						<td th:text="${pegawai.nip}"></td>
-						<td th:text="${pegawai.nama}"></td>
-						<td th:text="${pegawai.tempatLahir}"></td>
-						<td th:text="${pegawai.tanggalLahir}"></td>
-						<td th:text="${pegawai.tahunMasuk}"></td>
-						<td th:text="${pegawai.namaInstansi}"></td>
-						<td th:text="${pegawai.jabatan}"></td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr>
-						<th>NIP</th>
-						<th>Nama</th>
-						<th>Tempat Lahir</th>
-						<th>Tanggal Lahir</th>
-						<th>Tahun Masuk</th>
-						<th>Nama Instansi</th>
-						<th>Jabatan</th>
-					</tr>
-				</tfoot>
-			</table>
-		</div>
-
+				</span>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th>NIP</th>
+					<th>Nama</th>
+					<th>Tempat Lahir</th>
+					<th>Tanggal Lahir</th>
+					<th>Tahun Masuk</th>
+					<th>Nama Instansi</th>
+					<th>Jabatan</th>
+				</tr>
+			</tfoot>
+		</table>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -86,7 +85,7 @@
 
 	<script>
 		$(document).ready(function() {
-			$('#table_id').DataTable();
+			var table = $('#table_id').DataTable();
 		});
 	</script>
 </body>

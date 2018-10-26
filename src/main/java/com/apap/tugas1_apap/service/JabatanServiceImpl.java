@@ -1,6 +1,7 @@
 package com.apap.tugas1_apap.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,8 @@ public class JabatanServiceImpl implements JabatanService{
 	}
 
 	@Override
-	public JabatanModel findJabatanByIdJabatan(long idJabatan) {
-		return jabatanDb.getOne(idJabatan);
+	public Optional<JabatanModel> findJabatanByIdJabatan(long idJabatan) {
+		return jabatanDb.findById(idJabatan);
 	}
 
 	@Override

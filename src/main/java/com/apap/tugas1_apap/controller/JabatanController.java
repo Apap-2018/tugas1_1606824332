@@ -1,6 +1,7 @@
 package com.apap.tugas1_apap.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,8 @@ public class JabatanController {
 	@RequestMapping(value="/jabatan/tambah", method = RequestMethod.POST)
 	private String tambah(@ModelAttribute JabatanModel jabatan, Model model, RedirectAttributes ra) {
 		jabatanService.addJabatan(jabatan);
-		ra.addAttribute("alert", "alert-green('Data Berhasil Disimpan')");
+		ra.addFlashAttribute("alert", "alert-green");
+		ra.addFlashAttribute("alertText", "Data Berhasil Disimpan");
 		model.addAttribute("title", "Tambah Jabatan");
 		String link = "redirect:/jabatan/view?idJabatan="+String.valueOf(jabatan.getId());
 		return link;
@@ -42,9 +44,9 @@ public class JabatanController {
 	
 	@RequestMapping(value="/jabatan/view", method = RequestMethod.GET)
 	private String view(@RequestParam(value="idJabatan") long idJabatan, Model model) {
-		JabatanModel jabatan = jabatanService.findJabatanByIdJabatan(idJabatan);
-		if (jabatan != null) {
-			model.addAttribute("jabatan", jabatan);
+		Optional<JabatanModel> jabatan = jabatanService.findJabatanByIdJabatan(idJabatan);
+		if (jabatan.isPresent()) {
+			model.addAttribute("jabatan", jabatan.get());
 			return "view-jabatan";
 		}
 		return "notFound";
@@ -52,9 +54,9 @@ public class JabatanController {
 	
 	@RequestMapping(value="/jabatan/ubah", method = RequestMethod.GET)
 	private String ubah(@RequestParam(value="idJabatan") long idJabatan, Model model) {
-		JabatanModel jabatan = jabatanService.findJabatanByIdJabatan(idJabatan);
-		if (jabatan != null) {
-			model.addAttribute("jabatan", jabatan);
+		Optional<JabatanModel> jabatan = jabatanService.findJabatanByIdJabatan(idJabatan);
+		if (jabatan.isPresent()) {
+			model.addAttribute("jabatan", jabatan.get());
 			model.addAttribute("title", "Ubah Jabatan");
 			return "ubah-jabatan";
 		}else {
