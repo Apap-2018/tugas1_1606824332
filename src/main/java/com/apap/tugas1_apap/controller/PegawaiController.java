@@ -240,9 +240,11 @@ public class PegawaiController {
 		// Kalau cari by instansi 
 		if (idInstansi.isPresent()) {
 			InstansiModel instansi = instansiService.getInstansiById(idInstansi.get()).get(); //get instance instansi
+			System.out.println(instansi.getNama());
 			// kalau cari pegawai by jabatan dan instansi
 			if (idJabatan.isPresent()) {
 				JabatanModel jabatan = jabatanService.findJabatanByIdJabatan(idJabatan.get()).get();
+				System.out.println(jabatan.getNama());
 				selectedPegawai = pegawaiService.findByInstansiJabatan(instansi, jabatan);
 			}else {
 				// cuma cari berdasarkan instansi
@@ -259,15 +261,17 @@ public class PegawaiController {
 				JabatanModel jabatan = jabatanService.findJabatanByIdJabatan(idJabatan.get()).get(); 
 				// cari pegawai yang punya jabatan tersebut di list possible instansi
 				for (InstansiModel instansi : selectedInstansi) {
-					selectedPegawai = pegawaiService.findByInstansiJabatan(instansi, jabatan);
+					System.out.println("selected instansi: "+instansi.getNama());
+					selectedPegawai.addAll(pegawaiService.findByInstansiJabatan(instansi, jabatan));
 				}
 			}else {
 				//cari by provinsi aja
 				for (InstansiModel instansi : selectedInstansi) {
-					selectedPegawai = pegawaiService.findByInstansi(instansi);
+					System.out.println("selected instansi: "+instansi.getNama());
+					selectedPegawai.addAll(pegawaiService.findByInstansi(instansi));
 				}
 			}
-		}if (idJabatan.isPresent()) {
+		}else if (idJabatan.isPresent()) {
 			// cari by jabatan aja
 			// get instance provinsi
 			JabatanModel jabatan = jabatanService.findJabatanByIdJabatan(idJabatan.get()).get();

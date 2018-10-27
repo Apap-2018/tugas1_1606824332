@@ -1,5 +1,6 @@
 package com.apap.tugas1_apap.repository;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,10 @@ public interface PegawaiDb extends JpaRepository<PegawaiModel, Long>{
 	List<PegawaiModel> findByInstansi(InstansiModel instansi);
 	
 	List<PegawaiModel> findByJabatan(JabatanModel jabatan);
+	
+	List<PegawaiModel> findByTanggalLahir(Date tanggalLahir);
+	
+	List<PegawaiModel> findByTanggalLahirAndTahunMasuk(Date tanggalLahir, String tahunMasuk);
 	
 	List<PegawaiModel> findByInstansiAndJabatan(InstansiModel instansi, JabatanModel jabatan);
 }

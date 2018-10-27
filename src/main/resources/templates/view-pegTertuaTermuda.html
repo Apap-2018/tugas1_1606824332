@@ -18,29 +18,29 @@
 	                </div>
 					<div class="card-body">
 						<div class="row">
-							<p class="col-md-6 col-xs-6">NIP</p>
-							<p class="col-md-6 col-xs-6" th:text="${pegTermuda.nip}"></p>
+							<p class="col-md-6 col-xs-3">NIP</p>
+							<p class="col-md-6 col-xs-6" th:text="': '+${pegTermuda.nip}"></p>
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Nama</p>
-							<p class="col-md-6 col-xs-6" th:text="${pegTermuda.nama}"></p>
+							<p class="col-md-6 col-xs-6" th:text="': '+${pegTermuda.nama}"></p>
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Tempat Lahir</p>
-							<p class="col-md-6 col-xs-6" th:text="${pegTermuda.tempatLahir}"></p>
+							<p class="col-md-6 col-xs-6" th:text="': '+${pegTermuda.tempatLahir}"></p>
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Tanggal Lahir</p>
-							<p class="col-md-6 col-xs-6" th:text="${pegTermuda.tanggalLahir}"></p>
+							<p class="col-md-6 col-xs-6" th:text="': '+${pegTermuda.tanggalLahir}"></p>
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Tahun Masuk</p>
-							<p class="col-md-6 col-xs-6" th:text="${pegTermuda.tahunMasuk}"></p>
+							<p class="col-md-6 col-xs-6" th:text="': '+${pegTermuda.tahunMasuk}"></p>
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Nama Instansi</p>
 							<p class="col-md-6 col-xs-6"
-								th:text="${pegTermuda.instansi.nama} + ' - ' +${pegTermuda.instansi.provinsi.nama}"></p>
+								th:text="': '+${pegTermuda.instansi.nama} + ' - ' +${pegTermuda.instansi.provinsi.nama}"></p>
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Jabatan</p>
@@ -54,15 +54,8 @@
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Gaji</p>
-							<p class="col-md-6 col-xs-6" th:text="'Rp'+${gajiTermuda}"></p>
+							<p class="col-md-6 col-xs-6" th:text="': Rp'+${gajiTermuda}"></p>
 						</div>
-
-						<!--
-					    <form th:action="@{/dealer/delete}">
-					        <input type="hidden" name="dealerId" th:value="${dealer.id}">
-					        <button type="submit" class="btn btn-danger">Hapus Dealer</button>
-					    </form>
-					 -->
 					</div>
 				</div>
 	        </div>
@@ -74,28 +67,28 @@
 					<div class="card-body">
 						<div class="row">
 							<p class="col-md-6 col-xs-6">NIP</p>
-							<p class="col-md-6 col-xs-6" th:text="${pegTertua.nip}"></p>
+							<p class="col-md-6 col-xs-6" th:text="': '+${pegTertua.nip}"></p>
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Nama</p>
-							<p class="col-md-6 col-xs-6" th:text="${pegTertua.nama}"></p>
+							<p class="col-md-6 col-xs-6" th:text="': '+${pegTertua.nama}"></p>
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Tempat Lahir</p>
-							<p class="col-md-6 col-xs-6" th:text="${pegTertua.tempatLahir}"></p>
+							<p class="col-md-6 col-xs-6" th:text="': '+${pegTertua.tempatLahir}"></p>
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Tanggal Lahir</p>
-							<p class="col-md-6 col-xs-6" th:text="${pegTertua.tanggalLahir}"></p>
+							<p class="col-md-6 col-xs-6" th:text="': '+${pegTertua.tanggalLahir}"></p>
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Tahun Masuk</p>
-							<p class="col-md-6 col-xs-6" th:text="${pegTertua.tahunMasuk}"></p>
+							<p class="col-md-6 col-xs-6" th:text="': '+${pegTertua.tahunMasuk}"></p>
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Nama Instansi</p>
 							<p class="col-md-6 col-xs-6"
-								th:text="${pegTertua.instansi.nama} + ' - ' +${pegTertua.instansi.provinsi.nama}"></p>
+								th:text="': '+${pegTertua.instansi.nama} + ' - ' +${pegTertua.instansi.provinsi.nama}"></p>
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Jabatan</p>
@@ -109,15 +102,8 @@
 						</div>
 						<div class="row">
 							<p class="col-md-6 col-xs-6">Gaji</p>
-							<p class="col-md-6 col-xs-6" th:text="'Rp'+${gajiTertua}"></p>
+							<p class="col-md-6 col-xs-6" th:text="': Rp'+${gajiTertua}"></p>
 						</div>
-
-						<!--
-					    <form th:action="@{/dealer/delete}">
-					        <input type="hidden" name="dealerId" th:value="${dealer.id}">
-					        <button type="submit" class="btn btn-danger">Hapus Dealer</button>
-					    </form>
-					 -->
 					</div>
 				</div>
 	        </div>

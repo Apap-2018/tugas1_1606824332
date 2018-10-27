@@ -48,23 +48,43 @@ public class PegawaiServiceImpl implements PegawaiService{
 
 	@Override
 	public String generateNip(PegawaiModel pegawai) {
-//		idInstansi+tgllahir dd-mm-yy + mulai kerja + nomor urut
-
+		// NIP = idInstansi+tgllahir dd-mm-yy + mulai kerja + nomor urut
+		
+		// cek perubahan nip 
+		if (pegawai.getNip() != null) {
+			PegawaiModel oldData = pegawaiDb.getOne(pegawai.getId());
+			if (pegawai.getInstansi().equals(oldData.getInstansi()) && pegawai.getTahunMasuk().equals(oldData.getTahunMasuk()) && pegawai.getTanggalLahir().equals(oldData.getTanggalLahir())) {
+				return pegawai.getNip();
+			}
+		}
+		
 		String kodeInstansi = String.valueOf(pegawai.getInstansi().getId());
 		String mulaiMasuk = String.format("%04d", Integer.parseInt(pegawai.getTahunMasuk()));
-		int nomorUrut = 1;
+		int noUrut = 1;
 		
 		DateFormat df = new SimpleDateFormat("ddMMyy");
 		String kodeTglLahir = df.format(pegawai.getTanggalLahir());
 		System.out.println("Kode tanggal lahir: "+kodeTglLahir);
-				
-				
-		String nip = kodeInstansi.concat(kodeTglLahir).concat(mulaiMasuk).concat(String.format("%02d", nomorUrut));
-		while(pegawaiDb.existsByNip(nip)) {
-			nomorUrut+=01;
-			nip = nip.substring(0,14).concat(String.format("%02d", nomorUrut));
-			System.out.println(nip);
+		List<PegawaiModel> listTglLahirSama = pegawaiDb.findByTanggalLahir(pegawai.getTanggalLahir());
+		System.out.println(listTglLahirSama.get(0).getTanggalLahir());
+		System.out.println("tanggal Lahir: "+String.valueOf(pegawai.getTanggalLahir()));
+		List<PegawaiModel> listTglLahirTahunMasukSama = pegawaiDb.findByTanggalLahirAndTahunMasuk(pegawai.getTanggalLahir(), pegawai.getTahunMasuk());
+		System.out.println(listTglLahirTahunMasukSama.size());
+		if (listTglLahirTahunMasukSama.size()>=1) {
+			String lastElementSameNip = listTglLahirTahunMasukSama.get(listTglLahirTahunMasukSama.size()-1).getNip();
+			String lastNoUrut = lastElementSameNip.substring(14, 16);
+			System.out.println("last NIP: "+ lastElementSameNip);
+			System.out.println("Last No urut: "+lastNoUrut);
+			noUrut = Integer.parseInt(lastNoUrut)+1;
 		}
+		
+		System.out.println("current No Urut: "+String.valueOf(noUrut));
+		String nip = kodeInstansi.concat(kodeTglLahir).concat(mulaiMasuk).concat(String.format("%02d", noUrut));
+//		while(pegawaiDb.existsByNip(nip)) {
+//			nomorUrut+=01;
+//			nip = nip.substring(0,14).concat(String.format("%02d", nomorUrut));
+//			System.out.println(nip);
+//		}
 		return nip;
 	}
 	

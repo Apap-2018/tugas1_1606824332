@@ -22,7 +22,7 @@
 			</div>
 			<div class="form-group row">
 				<label for="instansi" class="col-sm-4 col-form-label">Nama Instansi</label> 
-				<select id="instansi" th:field="*{instansi}" name="idInstansi" onchange="showJabatan()">
+				<select id="instansi" name="idInstansi" onchange="showJabatan()">
 					<option value="" disabled selected>Pilih Instansi</option>
 					<option th:each="instansi : ${allInstansi}" th:value="${instansi.id}" th:text="${instansi.nama}">Instansi</option>
 				</select>
@@ -55,7 +55,7 @@
 			<tbody id="body-table">
 				<span th:each="pegawai : ${selectedPegawai}">
 					<tr th:each="jabatan : ${pegawai.jabatan}">
-							<td th:text="${pegawai.nip}"></td>
+							<td><a th:href="@{'/pegawai?nip='+${pegawai.nip}}" th:text="${pegawai.nip}"></a></td>
 							<td th:text="${pegawai.nama}"></td>
 							<td th:text="${pegawai.tempatLahir}"></td>
 							<td th:text="${pegawai.tanggalLahir}"></td>
