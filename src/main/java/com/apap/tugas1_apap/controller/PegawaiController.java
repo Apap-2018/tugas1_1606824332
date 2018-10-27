@@ -117,9 +117,11 @@ public class PegawaiController {
 	
 	@RequestMapping(value="/pegawai/tambah", method = RequestMethod.POST)
 	private String tambah(@ModelAttribute PegawaiModel pegawai, RedirectAttributes ra) {
+		System.out.println("id Pegawai: "+String.valueOf(pegawai.getId()));
 		String nip = pegawaiService.generateNip(pegawai);
 		pegawai.setNip(nip);
 		pegawaiService.addPegawai(pegawai);
+		
 		
 		ra.addFlashAttribute("alert", "alert-green");
 		ra.addFlashAttribute("alertText", "Pegawai Berhasil Ditambahkan");
@@ -157,7 +159,9 @@ public class PegawaiController {
 		
 		Integer rowId = Integer.valueOf(req.getParameter("deleteRow"));
 		System.out.println(rowId);
-		pegawai.getJabatan().remove(rowId.intValue());
+		if (pegawai.getJabatan().size() > rowId.intValue()) {
+			pegawai.getJabatan().remove(rowId.intValue());
+		}
 	    model.addAttribute("pegawai", pegawai);
 	    return "add-pegawai";
 	}

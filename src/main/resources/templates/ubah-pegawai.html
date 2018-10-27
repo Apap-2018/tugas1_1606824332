@@ -23,6 +23,9 @@
 							<div th:include="~{fragments/form :: form-pegawai}"></div>
 							<div class="form-group">
 								<div class="float-right">
+									<span class="form-group">
+										<input hidden name="nip" th:field="*{nip}">
+									</span>
 									<button type="submit" class="btn btn-primary">Ubah</button>
 								</div>
 							</div>

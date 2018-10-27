@@ -53,23 +53,18 @@
 			</select>
 		</span>
 	</div>
-	<span class="form-group">
-		<input hidden name="nip" th:value="${pegawai.nip}">
-		<input hidden name="id" th:value="${pegawai.id}">
-	</span>
 	<div class="form-group">
 		<span th:each="jabatan, iterationStat : *{jabatan}" class="row">
 			<label for="jabatan" class="col-sm-4 col-form-label" th:style="${iterationStat.count} != 1 ? 'color:white;' : ''">Jabatan</label><br>
 			<select class="select-jabatan col-sm-6" name="jabatan" required>
-				<option value="${jabatan.id}" disabled selected>Pilih Jabatan</option>
-				<option th:each="jabatan : ${allJabatan}" th:field="*{jabatan[__${iterationStat.index}__]}" th:value="${jabatan.id}" th:text="${jabatan.nama}"></option>
+				<option value="Pilih Jabatan" disabled selected>Pilih Jabatan</option>
+				<option th:each="jabatan : ${allJabatan}" th:field="*{jabatan[__${iterationStat.index}__]}" th:value="${jabatan.id} ? ${jabatan.id} : -1" th:text="${jabatan.nama}"></option>
 			</select>
 			<button type="submit" class="btn btn-danger btn-sm" name="deleteRow" th:value="${iterationStat.index}" th:style="${iterationStat.count} == 1 ? 'display: none;' : ''"><i class="fas fa-minus"></i></button>
 			<button type="submit" class="btn btn-info btn-sm" name="addRow" th:style="${iterationStat.index != (iterationStat.size-1)} ? 'display:none;' : ''"><i class="fas fa-plus"></i></button>
 		</span>
-		
+		<input hidden name="nip" th:field="*{id}">
 	</div>
-
 	
 </div>
 
