@@ -1,5 +1,6 @@
 package com.apap.tugas1_apap.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,7 +94,9 @@ public class JabatanController {
 	@RequestMapping(value="/jabatan/viewall")
 	private String viewall(Model model) {
 		List<JabatanModel> allJabatan = jabatanService.getListJabatan();
-		model.addAttribute("allJabatan",allJabatan);
+		HashMap<String, Integer> pegawaiNumOnJabatan = pegawaiService.getPegawaiNumOnJabatan(allJabatan);
+		model.addAttribute("allJabatan", allJabatan);
+		model.addAttribute("pegawaiNumOnJabatan", pegawaiNumOnJabatan);
 		return "viewall-jabatan";
 	}
 }

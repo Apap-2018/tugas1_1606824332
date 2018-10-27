@@ -1,6 +1,7 @@
 package com.apap.tugas1_apap.service;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,4 +27,6 @@ public interface PegawaiService {
 	List<PegawaiModel> findAll();
 
 	List<PegawaiModel> findByInstansiJabatan(InstansiModel instansi, JabatanModel jabatan);
+
+	HashMap<String, Integer> getPegawaiNumOnJabatan(List<JabatanModel> allJabatan);
 }

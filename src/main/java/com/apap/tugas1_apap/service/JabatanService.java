@@ -1,5 +1,6 @@
 package com.apap.tugas1_apap.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,4 +18,5 @@ public interface JabatanService {
 	List<JabatanModel> getListJabatan();
 
 	void deleteJabatan(long idJabatan);
+
 }

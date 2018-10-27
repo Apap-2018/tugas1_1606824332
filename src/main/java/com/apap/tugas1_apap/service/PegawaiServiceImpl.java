@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -106,5 +107,15 @@ public class PegawaiServiceImpl implements PegawaiService{
 	@Override 
 	public List<PegawaiModel> findByInstansiJabatan(InstansiModel instansi, JabatanModel jabatan){
 		return pegawaiDb.findByInstansiAndJabatan(instansi, jabatan);
+	}
+	
+	@Override
+	public HashMap<String, Integer> getPegawaiNumOnJabatan(List<JabatanModel> allJabatan){
+		HashMap<String, Integer> jabatanWithPegawaiNum = new HashMap<String, Integer>();
+		for (JabatanModel jabatan : allJabatan) {
+			jabatanWithPegawaiNum.put(String.valueOf(jabatan.getId()), pegawaiDb.findByJabatan(jabatan).size());
+			System.out.println(jabatanWithPegawaiNum.get(jabatan.getId()));
+		}
+		return jabatanWithPegawaiNum;
 	}
 }

@@ -1,5 +1,6 @@
 package com.apap.tugas1_apap.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,11 +10,15 @@ import org.springframework.stereotype.Service;
 import com.apap.tugas1_apap.model.JabatanModel;
 import com.apap.tugas1_apap.model.PegawaiModel;
 import com.apap.tugas1_apap.repository.JabatanDb;
+import com.apap.tugas1_apap.repository.PegawaiDb;
 
 @Service
 public class JabatanServiceImpl implements JabatanService{
 	@Autowired
 	private JabatanDb jabatanDb;
+	
+	@Autowired
+	private PegawaiDb pegawaiDb;
 	
 	@Override
 	public List<JabatanModel> getListJabatanOrderByPriceDesc(PegawaiModel pegawai) {
@@ -42,5 +47,4 @@ public class JabatanServiceImpl implements JabatanService{
 	}
 	
 	
-
 }
