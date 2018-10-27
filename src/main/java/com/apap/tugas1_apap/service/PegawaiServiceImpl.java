@@ -66,9 +66,10 @@ public class PegawaiServiceImpl implements PegawaiService{
 		DateFormat df = new SimpleDateFormat("ddMMyy");
 		String kodeTglLahir = df.format(pegawai.getTanggalLahir());
 		System.out.println("Kode tanggal lahir: "+kodeTglLahir);
-		List<PegawaiModel> listTglLahirTahunMasukSama = pegawaiDb.findByTanggalLahirAndTahunMasuk(pegawai.getTanggalLahir(), pegawai.getTahunMasuk());
+		List<PegawaiModel> listTglLahirTahunMasukSama = pegawaiDb.findByTanggalLahirAndTahunMasukAndInstansi(pegawai.getTanggalLahir(), pegawai.getTahunMasuk(), pegawai.getInstansi());
 		System.out.println(listTglLahirTahunMasukSama.size());
 		if (listTglLahirTahunMasukSama.size()>=1) {
+			System.out.println(listTglLahirTahunMasukSama.get(listTglLahirTahunMasukSama.size()-1).getNama());
 			String lastElementSameNip = listTglLahirTahunMasukSama.get(listTglLahirTahunMasukSama.size()-1).getNip();
 			String lastNoUrut = lastElementSameNip.substring(14, 16);
 			System.out.println("last NIP: "+ lastElementSameNip);
